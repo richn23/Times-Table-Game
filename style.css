@@ -1,0 +1,389 @@
+/* General Layout */
+.game {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 140px; /* Adjusted to push the grid down */
+}
+
+/* Top Row Styling */
+.top-row {
+    display: grid;
+    grid-template-columns: 60px repeat(15, 1fr);
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+/* Bottom Section: Side labels + main grid */
+.bottom-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 5px;
+}
+
+/* Side Row */
+.side-row {
+    display: grid;
+    grid-template-rows: repeat(15, 1fr);
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+/* Main Grid: Light Blue */
+.main {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    gap: 2px;
+}
+
+/* Square Styling */
+.square {
+    height: 40px;
+    width: 40px;
+    background: linear-gradient(to bottom right, #A0D8FF, #4A90E2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    color: white;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', cursive;
+    font-weight: bold;
+    font-size: 1.2em;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Darker Blue for 1-15 Top & Side Row */
+.top-row .square:not(:first-child),
+.side-row .square {
+    background: linear-gradient(to bottom right, #004080, #002F6C); /* Darker blue */
+}
+
+/* Question Box Styling - Fixed Position Above Grid */
+.question-box {
+    position: absolute;
+    top: 10px; /* Provides spacing from the top */
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom right, #FFD700, #FF8C00); /* Gold to Orange gradient */
+    padding: 15px 25px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', cursive;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: white;
+    border: 3px solid #FF4500; /* Orange-Red Border */
+    z-index: 10;
+    min-width: 300px; /* Ensures consistent width */
+    max-width: 600px; /* Prevents excessive stretching */
+    white-space: nowrap; /* Prevents multi-line wrapping */
+}
+
+
+
+/* Status Container: Aligns timer, mistake tracker, and restart button in a row at the bottom of the screen */
+.status-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 900px; /* Increase width to fit everything */
+    margin: 20px auto;
+    padding: 10px;
+    gap: 10px; /* Adds spacing between elements */
+}
+
+/* Status Boxes (Timer & Mistake Tracker) */
+.status-box {
+    flex: 1; /* Ensures equal width */
+    text-align: center;
+    padding: 10px;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', cursive;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 10px;
+    color: white;
+}
+
+/* Timer (Green) */
+#timer {
+    background: linear-gradient(to bottom right, #50C878, #008000);
+    border: 3px solid #006400;
+}
+
+/* Mistake Tracker (Orange) */
+#mistake-tracker {
+    background: linear-gradient(to bottom right, #FFD700, #FF8C00);
+    border: 3px solid #FF4500;
+}
+
+/* Restart Button */
+#restart {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', cursive;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 10px;
+    background: linear-gradient(to bottom right, #FF6347, #FF4500);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+/* Restart Button change when move cursor over */
+#restart:hover {
+    background: linear-gradient(to bottom right, #FF4500, #B22222);
+    transform: scale(1.1);
+}
+/* Animation for Grid Buttons when clicked */
+.square button {
+    perspective: 1000px; /* Enables 3D effect */
+    background: linear-gradient(to bottom right, #A0D8FF, #4A90E2);
+    border: 1px solid #004080;
+    color: black;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', cursive;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: transform 0.5s, background 0.3s;
+    position: relative;
+}
+
+.square {
+    transition: transform 0.2s ease-in-out;
+}
+
+/*  When hovered, enlarge the square and change color so usre can see where they are */
+.square:hover {
+    transform: scale(1.2); /* Enlarges the entire square */
+    background: linear-gradient(to bottom right, #FFD700, #FFA500); /* Gold to Orange */
+    color: black; /* Improve contrast */
+}
+
+/* Turn the square after flipping */
+.square.flipped {
+    background: linear-gradient(to bottom right, #4CAF50, #2E7D32) !important; /* Green gradient */
+    color: white !important;
+    border: 2px solid #1B5E20; /* Dark green border */
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+/* Correct Answer (Green) */
+.square.flipped.correct {
+    background: linear-gradient(to bottom right, #4CAF50, #2E7D32) !important; /* Green */
+    color: white !important;
+    border: 2px solid #1B5E20 !important;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Incorrect Answer (Red) */
+.square.flipped.incorrect {
+    background: linear-gradient(to bottom right, #FF4C4C, #B22222) !important; /* Red */
+    color: white !important;
+    border: 2px solid #8B0000 !important;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+/* Force button inside the square to match the correct/wrong color */
+.square button.correct {
+    background: linear-gradient(to bottom right, #4CAF50, #2E7D32) !important;
+}
+
+.square button.wrong {
+    background: linear-gradient(to bottom right, #dc3545, #c82333) !important;
+}
+
+/* Flip Effect */
+.square button::after {
+    content: "?";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom right, #A0D8FF, #4A90E2);
+    border-radius: 5px;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* Hover Effect - Slight Scale */
+.square button:hover {
+    background: linear-gradient(to bottom right, #B8E4FF, #5AAEFF);
+    transform: scale(1.1);
+}
+
+/* Click Effect - Flip Animation */
+.square button:active {
+    transform: rotateY(180deg);
+}
+document.querySelectorAll(".main button").forEach((button, index) => {
+    let I = index + 1;
+    let row = (I % 15) + 1;
+    let col = Math.floor(I / 15) + 1;
+    let answer = row * col;
+
+    button.setAttribute("data-answer", answer); // Stores the answer for flipping
+});
+/* Button container perspective for 3D effect */
+.square {
+    perspective: 1000px;
+}
+
+/* Button Styling */
+.square button {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, #A0D8FF, #4A90E2);
+    border: 1px solid #004080;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+}
+
+/* Adding the front and back faces for the flip effect */
+.square button .front,
+.square button .back {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out;
+}
+
+/* The front face (initial view) */
+.square button .front {
+    background: linear-gradient(to bottom right, #A0D8FF, #4A90E2);
+}
+
+/* The back face (revealed after flip) */
+.square button .back {
+    background: linear-gradient(to bottom right, #4A90E2, #002F6C);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+/* Flip animation */
+.square button.flipped {
+    transform: rotateY(180deg);
+}
+/* Ensure the button container has perspective for 3D effect */
+.square {
+    perspective: 1000px;
+}
+/* Styling the button */
+.square button {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, #A0D8FF, #4A90E2);
+    border: 1px solid #004080;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+}
+
+/* Adding the front and back faces for the flip effect */
+.square button .front,
+.square button .back {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out;
+}
+
+/* The front face (initial view) */
+.square button .front {
+    background: linear-gradient(to bottom right, #A0D8FF, #4A90E2);
+}
+
+/* The back face (revealed after flip) */
+.square button .back {
+    background: linear-gradient(to bottom right, #4A90E2, #002F6C);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+/* Flip animation */
+.square button.flipped {
+    transform: rotateY(180deg);
+}
+#scoreboard {
+    background: linear-gradient(to bottom right, #4169E1, #1E90FF); /* Blue gradient */
+    border: 3px solid #000080; /* Dark Blue Border */
+    padding: 15px 25px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', cursive;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: white;
+    min-width: 200px;
+}
+
+/* ✅ Large, Pulsing Game Over Message */
+.game-over-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', cursive;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    animation: pulse 1s infinite alternate ease-in-out;
+}
+
+/* ✅ Pink for Time's Up */
+.pink {
+    background: linear-gradient(to bottom right, #FF69B4, #FF1493); /* Pink */
+    border: 3px solid #C71585;
+}
+
+/* ✅ Purple for Out of Lives */
+.purple {
+    background: linear-gradient(to bottom right, #8A2BE2, #4B0082); /* Purple */
+    border: 3px solid #6A0DAD;
+}
+
+/* ✅ Pulse Animation */
+@keyframes pulse {
+    from {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
