@@ -405,40 +405,45 @@ document.querySelectorAll(".main button").forEach((button, index) => {
 }
 
 @media (max-width: 600px) {
-    /* ✅ Reduce overall grid size for smaller screens */
-    .main {
-        width: 95vw;
-        height: 95vw;
-        gap: 1px; /* Reduce space between squares */
+    /* ✅ Scale the entire game down */
+    .game {
+        transform: scale(0.9); /* Shrink the game slightly */
+        transform-origin: top center;
     }
 
-    /* ✅ Make sure the side-row stays aligned */
+    /* ✅ Force the grid to fit mobile screens */
+    .main {
+        width: 90vw;
+        height: 90vw;
+        gap: 1px; /* Reduce spacing */
+    }
+
+    /* ✅ Adjust the side row (left numbers) */
     .side-row {
-        width: 8vw; /* Adjust width for smaller screens */
-        height: 95vw; /* Match main grid height */
+        width: 8vw; /* Keep it proportional */
+        height: 90vw; /* Match the grid */
     }
 
     .side-row .square {
-        font-size: clamp(8px, 1.5vw, 12px); /* Keep numbers readable */
+        font-size: clamp(8px, 1.5vw, 14px); /* Scale text properly */
     }
 
-    /* ✅ Reduce top row (1-15) size */
+    /* ✅ Resize the top row (numbers 1-15) */
     .top-row {
-        font-size: clamp(10px, 1.8vw, 14px);
+        font-size: clamp(10px, 2vw, 16px);
     }
 
-    /* ✅ Adjust the question box */
+    /* ✅ Fix the Question Box */
     .question-box {
-        font-size: 1.3em; /* Slightly smaller text */
+        font-size: 1.2em;
         padding: 8px 15px;
-        width: auto;
-        max-width: 90%;
+        max-width: 85%;
     }
 
-    /* ✅ Make the restart button bigger for touch */
+    /* ✅ Resize the Restart Button */
     #restart {
         width: 80%;
         padding: 12px;
-        font-size: 1.2em;
+        font-size: 1.1em;
     }
 }
